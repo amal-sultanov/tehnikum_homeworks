@@ -1,0 +1,7 @@
+numbers = [i for i in range(50)]
+multiplied_numbers = [i * 5 for i in range(1, 100)]
+square_numbers = [i ** 2 for i in range(0, 50)]
+even_numbers = [i for i in range(1, 30) if i % 2 == 0]
+odd_numbers = [i for i in range(1, 30) if i % 2 != 0]
+chars1 = [i for i in 'TEST']
+chars2 = [i for i in 'some string for testing' if i == 's']
