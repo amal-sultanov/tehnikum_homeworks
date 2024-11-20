@@ -2,7 +2,7 @@ import requests
 import telebot
 from telebot import types
 
-bot = telebot.TeleBot('7882237645:AAEogmFBpCAQfl5uocSz9B41A9eo4Znwrx4')
+bot = telebot.TeleBot('')
 components = {'target_currency': '', 'current_currency': '', 'amount': 0}
 
 

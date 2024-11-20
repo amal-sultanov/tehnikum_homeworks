@@ -3,7 +3,7 @@ import telebot
 import database
 import keyboards
 
-bot = telebot.TeleBot('7882237645:AAEogmFBpCAQfl5uocSz9B41A9eo4Znwrx4')
+bot = telebot.TeleBot('')
 
 
 @bot.message_handler(commands=['start'])

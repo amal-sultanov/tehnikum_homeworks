@@ -3,7 +3,7 @@ import telebot
 import buttons
 import database
 
-bot = telebot.TeleBot('7934834183:AAEyNjCmZD741QGgvP6Fm-sFi0b6NCuofxU')
+bot = telebot.TeleBot('')
 
 
 @bot.message_handler(commands=['start'])
