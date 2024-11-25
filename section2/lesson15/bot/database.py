@@ -72,18 +72,56 @@ def make_order(user_id):
     available_quantities = [
         sql.execute('SELECT quantity FROM products WHERE name=?;',
                     (i[0],)).fetchone()[0] for i in user_cart_products]
-    totals = []
-    # i - how many the user has taken
-    for i in user_cart_quantities:
-        # j - quantity from stock
-        for j in available_quantities:
-            totals.append(j - i[0])
+    updated_quantities = []
 
-    # t - changed product quantity
-    for t in totals:
-        # n - products name
-        for n in user_cart_products:
+    for cart_quantity in user_cart_quantities:
+        for quantity in available_quantities:
+            updated_quantities.append(quantity - cart_quantity[0])
+
+    for quantity in updated_quantities:
+        for product_name in user_cart_products:
             sql.execute('UPDATE products SET quantity=? WHERE name=?;',
-                        (t, n[0]))
+                        (quantity, product_name[0]))
     connection.commit()
-    return available_quantities, totals
+
+    return available_quantities, updated_quantities
+
+
+def add_product(name, description, price, quantity, photo):
+    if (name,) in sql.execute('SELECT name FROM products;').fetchall():
+        return False
+    sql.execute('INSERT INTO products '
+                '(name, description, price, quantity, photo) '
+                'VALUES (?, ?, ?, ?, ?);',
+                (name, description, price, quantity, photo))
+    connection.commit()
+
+
+def delete_product(product_name):
+    sql.execute('DELETE FROM products WHERE name=?;', (product_name,))
+    connection.commit()
+
+
+def change_attribute(current_value, new_value, attribute=''):
+    if attribute == 'name':
+        sql.execute('UPDATE products SET name=? WHERE name=?;',
+                    (new_value, current_value))
+    elif attribute == 'description':
+        sql.execute('UPDATE products SET description=? WHERE name=?;',
+                    (new_value, current_value))
+    elif attribute == 'price':
+        sql.execute('UPDATE products SET price=? WHERE name=?;',
+                    (new_value, current_value))
+    elif attribute == 'quantity':
+        sql.execute('UPDATE products SET quantity=? WHERE name=?;',
+                    (new_value, current_value))
+    elif attribute == 'photo':
+        sql.execute('UPDATE products SET photo=? WHERE name=?;',
+                    (new_value, current_value))
+    connection.commit()
+
+
+def check_products():
+    if sql.execute('SELECT * FROM products;').fetchall():
+        return True
+    return False
