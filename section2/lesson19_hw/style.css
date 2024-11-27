@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.header {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    background-color: gray;
+    color: white;
+}
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+.divider {
+    width: 2px;
+    height: 120px;
+    background-color: white;
+    margin-right: 30px;
+}
+.header-details h1 {
+    font-size: 25px;
+    color: orange;
+}
+h2 {
+    color: rgb(109, 104, 104);
+    border-bottom: 2px solid orange;
+}
